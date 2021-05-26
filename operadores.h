@@ -11,6 +11,4 @@ int division(int *args); // /
 int modulo(int *args); // %
 int potencia(int *args); // ^
 
-
-xd
 #endif __OPERADORES_H__
