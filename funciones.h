@@ -8,8 +8,8 @@
 	*/
 	struct Nodo {
 		struct Nodo *izq;
-	    struct Nodo *der;
-	    char *cont;
+	  struct Nodo *der;
+	  char *dato;
 	};
 
 	struct *Operador;
@@ -17,7 +17,7 @@
 	/*
 	Función para cargar los datos al árbol.
 	*/
-	struct Nodo cargar(char *datoCargar);
+	void cargar(const char *string, Nodo *Operador)
 
 	/*
 	Función para imprimir los datos en notacion infija.
