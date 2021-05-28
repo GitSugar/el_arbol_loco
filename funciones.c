@@ -2,30 +2,29 @@
 #include <stdlib.h>
 #include <string.h>
 
-void cargar(const char *string, Nodo *Operador) {
+void cargar(const char *string, Nodo *raiz) {
     /* Notacion postfija = izq der op */
-
     Nodo *newNodo;
-    /* Supongo entrada sanitizada y sin espacios. */
-    for (int i=0; i<strlen(string); i++) {
-      
-    }
+
+    /* Supongo entrada sanitizada. */
+    /* Ejemplo: 5 -- 13 + 2 * 7 + */
+    
 
 
 }
 
 
-void imprimir(Nodo *Operador) {   
+void imprimir(Nodo *raiz) {   
     /* La wea in order, primero el sub arbol de la izq */
-    if ( Operador -> izq != NULL )
-        imprimir(Operador -> izq);
+    if ( raiz -> izq != NULL )
+        imprimir(raiz -> izq);
 
     /* luego el nodo actual. */
-    printf(" %s ", Operador -> dato);
+    printf(" %s ", raiz -> dato);
 
     /* Por ultimo del de la derecha */
-    if ( Operador -> der != NULL )
-        imprimir(Operador -> der);
+    if ( raiz -> der != NULL )
+        imprimir(raiz -> der);
 }
 
 int main(int argc, char const *argv[]) {

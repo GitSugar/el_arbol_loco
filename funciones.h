@@ -9,38 +9,38 @@
 	struct Nodo {
 		struct Nodo *izq;
 	  struct Nodo *der;
-	  char *dato;
+	  char* dato;
 	};
 
-	struct *Operador;
+	struct Nodo* raiz = NULL;
 
 	/*
 	Función para cargar los datos al árbol.
 	*/
-	void cargar(const char *string, Nodo *Operador)
+	void cargar(const char* string, Nodo* raiz)
 
 	/*
 	Función para imprimir los datos en notacion infija.
 	*/
-	void imprimir(Nodo *Operador);
+	void imprimir(Nodo* raiz);
 
 	/*
 	Genera un nodo en el arbol con los valores laterales.
 	*/
-	void cargar_operador(TablaOps *tabla, char *simbolo, int aridad, FuncionEvaluacion Eval);
+	void cargar_operador(TablaOps* tabla, char* simbolo, int aridad, FuncionEvaluacion Eval);
 
 	/*
 	Interpreta los comandos ingresados y los resuelve usando la tabla de operadores.
 	*/
-	void interpretar(TablaOps *tabla);
+	void interpretar(TablaOps* tabla);
 
   /*
   Se asegura de que la entrada sea numerica.
   */
-  int no_palabra(char *entrada);
+  int no_palabra(char* entrada);
 
   /*
   Resuelve el arbol
   */
-  int evaluar(Nodo *Operador);
+  int evaluar(Nodo* raiz);
 #endif  __FUNCIONES_H__
