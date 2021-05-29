@@ -67,9 +67,3 @@ void imprimir(struct Nodo* raiz) {
   if ( raiz -> der != NULL )
     imprimir(raiz -> der);
 }
-
-
-int main(int argc, char const *argv[]) {
-  //La concha de tu madre all boys
-  return 0;
-}
