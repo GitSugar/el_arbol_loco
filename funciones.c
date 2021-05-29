@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct Nodo* cargar(char *string){
-  struct Nodo* newNodo;
-  struct Nodo* raiz = malloc(sizeof(struct Nodo));
+Nodo* cargar(char *string){
+  Nodo* newNodo;
+  Nodo* raiz = malloc(sizeof(struct Nodo));
 
   char *token;
   char *temp = malloc(sizeof(char)* (strlen(string) + 1));
@@ -45,7 +45,7 @@ struct Nodo* cargar(char *string){
  return raiz;
 }
 
-void imprimir(struct Nodo* raiz) {   
+void imprimir(Nodo* raiz) {   
   /* La wea in order, primero el sub arbol de la izq */
   if ( raiz -> izq != NULL )
     imprimir(raiz -> izq);
@@ -64,10 +64,6 @@ int bot(char* dato){
       return 1;
   }
   return 0;
-}
-
-int check() {
-
 }
 
 char* reordenada(char* string) {
@@ -97,6 +93,10 @@ char* reordenada(char* string) {
   newString[largo + 1] = '\0';
 
   return newString;
+}
+
+int evaluar(struct Nodo raiz){
+
 }
 
 

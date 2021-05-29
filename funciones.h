@@ -6,25 +6,23 @@
 	Contiene nodo Izq, nodo Der y el contenido.
 	No pidas mas.
 	*/
-	struct Nodo {
-		struct Nodo *izq;
-	  struct Nodo *der;
+	typedef struct NODO {
+		Nodo *izq;
+	  Nodo *der;
 	  char* dato;
-	};
-
-	struct Nodo* raiz = NULL;
+	}Nodo;
 
 	/*
 	Estructura para Guardar los Aliases
 	Contiene Lista Simplemente Enlazada
 	Nombre, operacion y el arbol donde se guarda.
 	*/
-	struct Lista {
+	typedef struct TABLAOPS {
 		char* alias;
 		char* operacion;
-		struct Lista *sig;
-		struct Nodo *raiz_op;
-	};
+		TablaOps *sig;
+		Nodo *raizOp;
+	}TablaOps;
 
 
 	char* revstring(char* string);
