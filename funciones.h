@@ -1,6 +1,6 @@
 #ifndef __FUNCIONES_H__
 #define __FUNCIONES_H__
-
+	
 	/*
 	Estructura basica para un árbol.
 	Contiene nodo Izq, nodo Der y el contenido.
@@ -15,9 +15,21 @@
 	struct Nodo* raiz = NULL;
 
 	/*
+	Estructura para Guardar los Aliases
+	Contiene Lista Simplemente Enlazada
+	Nombre, operacion y el arbol donde se guarda.
+	*/
+	struct Lista {
+		char* alias;
+		char* operacion;
+		struct Lista *sig;
+		struct Nodo *raiz_op;
+	};
+
+	/*
 	Función para cargar los datos al árbol.
 	*/
-	void cargar(const char* string, Nodo* raiz)
+	void cargar(const char* string, Nodo* raiz);
 
 	/*
 	Función para imprimir los datos en notacion infija.

@@ -1,4 +1,4 @@
-// gcc main.c funciones.c operadores.c -std=c99 -h funciones.h operadores.h -o a.o
+// gcc main.c funciones.c operadores.c -std=c99 -h funciones.h operadores.h -o a.out
 
 #include <stdio.h>
 #include <stdlib.h>
