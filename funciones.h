@@ -6,11 +6,11 @@
 	Contiene nodo Izq, nodo Der y el contenido.
 	No pidas mas.
 	*/
-	typedef struct node {
+	struct Nodo {
 		struct Nodo *izq;
 	  struct Nodo *der;
 	  char* dato;
-	}Nodo;
+	};
 
 	struct Nodo* raiz = NULL;
 
@@ -27,6 +27,7 @@
 	};
 
 
+	char* revstring(char* string);
 
 	/*
 	Función para cargar los datos al árbol.
