@@ -1,9 +1,4 @@
 #include <math.h>
-#include "operadores.h"
-
-
-
-
 
 int suma(int *args){
     int res;
@@ -11,15 +6,11 @@ int suma(int *args){
     return res;
 }
 
-
-
 int resta(int *args){
     int res;
     res = args[0] - args[1];
     return res;
 }
-
-
 
 int opuesto(int *args){
     int op;
@@ -27,15 +18,11 @@ int opuesto(int *args){
     return op;
 }
 
-
-
 int producto(int *args){
     int res;
     res = args[0] * args[1];
     return res;
 }
-
-
 
 int division(int *args){
     int res;
@@ -44,8 +31,6 @@ int division(int *args){
         return args;
     }
 }
-
-
 
 int modulo(int *args){
     int res;
@@ -56,12 +41,8 @@ int modulo(int *args){
     return args[0];
 }
 
-
 int potencia(int *args){
     int res;
     res = pow(args[0],args[1]);
     return res;
 }
-
-
-
