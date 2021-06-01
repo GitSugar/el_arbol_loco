@@ -66,6 +66,44 @@ int bot(char* dato){
   return 0;
 }
 
+void quemar_arbol(Nodo* raiz) {
+
+  if ( raiz -> izq != NULL ) {
+    quemar_bosque(raiz -> izq);
+  }
+
+  free(raiz -> dato);
+
+  if(raiz -> der != NULL) {
+    quemar_bosque(raiz -> der);
+  }
+  else {
+    free(raiz);
+  }
+}
+
+void quemar_bosque(TablaOps* Tabla) {
+  if ( Tabla -> sig != NULL )
+    quemar_bosque(Tabla -> sig);
+  
+  free(Tabla -> alias);
+  free(Tabla -> operacion);
+  quemar_arbol(Tabla -> raizOp);
+  free(Tabla);
+}
+
+void salir(TablaOps* Tabla) {
+
+  printf("Saliendo del programa.\n");
+  printf("Liberando datos...\n");
+
+  quemar_bosque(Tabla);
+
+  printf("Datos Liberados!\n");
+  printf("Gracias, vuelva prontos\n");
+
+}
+
 char* reordenada(char* string) {
   int largo = strlen(string);
    
@@ -99,7 +137,7 @@ int evaluar(struct Nodo raiz){
 
 }
 
-
+  
 
 /* deberiamos usar la funcion bot para comprobar que no haya mas de 2 numeros
 consecutivos, ya que las operaciones son binarias como mucho, y eso llevaria a 
