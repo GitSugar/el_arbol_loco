@@ -9,6 +9,7 @@
 	typedef struct NODO {
 		Nodo *izq;
 	  Nodo *der;
+	  int flag;
 	  char* dato;
 	}Nodo;
 
@@ -17,15 +18,31 @@
 	Contiene Lista Simplemente Enlazada
 	Nombre, operacion y el arbol donde se guarda.
 	*/
-	typedef struct TABLAOPS {
+	typedef struct BOSQUE {
 		char* alias;
 		char* operacion;
-		TablaOps *sig;
+		bosque *sig;
 		Nodo *raizOp;
-	}TablaOps;
+	}Bosque;
 
+	/*
+	Estructura para almacenar las operaciones.
+	*/
+	typedef struct TABLAOPS {
+		tablaops *sig;
+		char* simbolo;
+		int aridad;
+		FuncionEvaluacion* eval;
+	}tablaOps;
 
-	char* revstring(char* string);
+	/*
+	Funcion para reordenar la cadena y leerla de atras para adelante.
+	*/
+	char* reordenada(char* string);
+
+	void quemar_arbol(Nodo* raiz);
+
+	void quemar_bosque(Bosque* bosque);
 
 	/*
 	Función para cargar los datos al árbol.
@@ -38,14 +55,14 @@
 	void imprimir(Nodo* raiz);
 
 	/*
-	Genera un nodo en el arbol con los valores laterales.
+	Carga los distintos operadores disponibles en una lista.
 	*/
-	void cargar_operador(TablaOps* tabla, char* simbolo, int aridad, FuncionEvaluacion Eval);
+	void cargar_operador(tablaOps* tabla, char* simbolo, int aridad, FuncionEvaluacion Eval);
 
 	/*
 	Interpreta los comandos ingresados y los resuelve usando la tabla de operadores.
 	*/
-	void interpretar(TablaOps* tabla);
+	void interpretar(tablaOps* tabla);
 
   /*
   Se asegura de que la entrada sea numerica.

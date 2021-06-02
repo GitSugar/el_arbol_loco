@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 Nodo* cargar(char *string){
   Nodo* newNodo;
@@ -101,7 +102,31 @@ void salir(TablaOps* Tabla) {
 
   printf("Datos Liberados!\n");
   printf("Gracias, vuelva prontos\n");
+}
 
+char* tolower_string(char* string) {
+  for(int i = 0; string[i] != '\0'; i++) {
+    string[i] = tolower(string[i]);
+  }
+  return string;
+}
+
+int alias_check(char* alias) {
+  char* temp = tolower_string(alias);
+  return (strcmp(temp, "cargar") == 0 || strcmp(temp, "imprimir") == 0 || strcmp(temp, "salir") == 0 || strcmp(temp, "evaluar") == 0);}
+
+
+int op_check(char* operacion) {
+  return (isalpha(operacion[0]) || isdigit(operacion[0]));
+}
+
+int op_alpha(char* operacion) {
+  for(int i = 0; operacion[i] != '\0'; i++) {
+    if (isalpha(operacion[i])) {
+      return 1;
+    }
+  }
+  return 0;
 }
 
 char* reordenada(char* string) {
