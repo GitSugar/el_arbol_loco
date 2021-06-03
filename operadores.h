@@ -1,75 +1,68 @@
 #ifndef __OPERADORES_H__
 #define __OPERADORES_H__
-  typedef int (*FuncionEvaluacion)(int *args);
+typedef int (*FuncionEvaluacion)(int *args);
 
-  /*
-  Suma:
+/*
+Suma:
+La funcion suma toma los valores dentro del arreglo *args como elementos para 
+ser sumados, y devuelve la suma de los mismos.
 
-  La funcion suma toma los valores dentro del arreglo *args como elementos para 
-  ser sumados, y devuelve la suma de los mismos.
+Simbolo: +
+*/
+int suma(int *args);
 
-  Simbolo: +
-  */
-  int suma(int *args);
+/*
+Resta:
+La funcion resta toma los valores dentro del arreglo *args como elementos para 
+ser restados, y devuelve la resta de los mismos.
 
-  /*
-  Resta:
+Simbolo: -
+*/
+int resta(int *args);
 
-  La funcion resta toma los valores dentro del arreglo *args como elementos para 
-  ser restados, y devuelve la resta de los mismos.
+/*
+Opuesto:
+La funcion opuesto toma el unico valor int en *args y devuelve el opuesto
 
-  Simbolo: -
-  */
-  int resta(int *args);
+Simbolo: --
+*/
+int opuesto(int *args);
 
-  /*
-  Opuesto:
+/*
+Producto:
+La funcion producto toma los valores dentro del arreglo *args como elementos 
+para ser multiplicados, y devuelve el producto de los mismos
 
-  La funcion opuesto toma el unico valor int en *args y devuelve el opuesto
+Simbolo: *
+*/
+int producto(int *args);
 
-  Simbolo: --
-  */
-  int opuesto(int *args);
+/*
+Division:
+La funcion division toma los valores dentro del arreglo *args como elementos 
+para ser divididos, y devuelve el cociente de los mismos, redondeando los 
+valores decimales hacia la parte entera
 
-  /*
-  Producto:
+Simbolo: /
+*/
+int division(int *args);
 
-  La funcion producto toma los valores dentro del arreglo *args como elementos 
-  para ser multiplicados, y devuelve el producto de los mismos
+/*
+Modulo:
+La funcion modulo toma el unico valor int en *args y devuelve el opuesto si es
+negativo, o el mismo valor si es positivo o cero
 
-  Simbolo: *
-  */
-  int producto(int *args);
+Simbolo: %
+*/
+int modulo(int *args);
 
-  /*
-  Division:
+/*
+Potencia:
+La funcion potencia toma los valores dentro del arreglo *args, siendo el
+primer elemento la base y el segundo elemento el exponente, y devuelve la base
+elevada a la potencia
 
-  La funcion division toma los valores dentro del arreglo *args como elementos 
-  para ser divididos, y devuelve el cociente de los mismos, redondeando los 
-  valores decimales hacia la parte entera
-
-  Simbolo: /
-  */
-  int division(int *args);
-
-  /*
-  Modulo:
-
-  La funcion modulo toma el unico valor int en *args y devuelve el opuesto si es
-  negativo, o el mismo valor si es positivo o cero
-
-  Simbolo: %
-  */
-  int modulo(int *args);
-
-  /*
-  Potencia:
-
-  La funcion potencia toma los valores dentro del arreglo *args, siendo el
-  primer elemento la base y el segundo elemento el exponente, y devuelve la base
-  elevada a la potencia
-
-  Simbolo: ^
-  */
-  int potencia(int *args);
-#endif __OPERADORES_H__
+Simbolo: ^
+*/
+int potencia(int *args);
+#endif
