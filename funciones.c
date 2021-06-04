@@ -259,7 +259,8 @@ void salir(Bosque* tabla) {
   printf("Saliendo del programa.\n");
   printf("Liberando datos...\n");
 
-  quemar_bosque(tabla);
+  if(tabla)
+    quemar_bosque(tabla);
 
   printf("Datos Liberados!\n");
   printf("Gracias, vuelva prontos\n");

@@ -51,7 +51,7 @@ int main(int argc, char const *argv[]) {
 
     //The eternal IF statement.
 
-    if (strcmp(token, "salir") == 0) {
+    if (strcmp(token, "salir\n") == 0) {
       salir(l_arboles);
       free(token);
       free(input);
