@@ -6,7 +6,7 @@
 #include "operadores.h"
 
 typedef struct STACK{
-  int tamaño_max;
+  int size_max;
   //int top;
   //int *items;
 }Stack;
@@ -123,11 +123,10 @@ void imprimir(Nodo* raiz) {
 }
 
 int bot(char* dato) {
-  if(strcmp(dato,"+") == 0 || strcmp(dato,"-") == 0 || strcmp(dato,"/") == 0 ||
-    strcmp(dato,"*") == 0 || strcmp(dato,"^") == 0 ){
-    return 1;
+  if(strcmp(dato,"--") == 0 ){
+    return 0;
   }
-  return 0;
+  return 1;
 }
 
 int evaluar(Nodo* raiz, TablaOps* tabla) {
@@ -139,7 +138,8 @@ int evaluar(Nodo* raiz, TablaOps* tabla) {
   
   for(;tabla -> sig != NULL; tabla = tabla -> sig){
     if(strcmp(raiz -> dato , tabla -> simbolo ) == 0){
-      return (tabla -> eval)({valIZ , valDER});
+      int val[] = {valIZ , valDER};
+      return (*tabla -> eval)(val);
     }
   }
 }
@@ -237,7 +237,7 @@ void cargar_operador(TablaOps** tabla , char* simbolo , int aridad , FuncionEval
   newItem -> simbolo = malloc(sizeof(char) * (strlen(simbolo) + 1)); 
   strcpy(newItem -> simbolo , simbolo);
   newItem -> aridad = aridad;
-  newItem -> eval = eval;
+  newItem -> eval = &eval;
   newItem -> sig = NULL;
   
   if(*tabla != NULL) {
@@ -247,24 +247,28 @@ void cargar_operador(TablaOps** tabla , char* simbolo , int aridad , FuncionEval
 }
 
 
-
-struct stack* newStack(int tamaño) {
+/*
+struct stack* newStack(int size) {
   Stack *pt = malloc(sizeof(Stack));
  
-  pt -> tamaño_max = tamaño;
+  pt -> size_max = size;
   pt -> top = -1;
-  pt -> items = malloc(sizeof(int) * tamaño);
+  pt -> items = malloc(sizeof(int) * size);
  
   return pt;
 }
 
+int isEmpty(struct stack *pt) {
+    return pt->top == -1;
+ 
+int isFull(struct stack *pt) {
+    return pt->top == pt->maxsize - 1;
+}
+
 void push(Stack *pt, int x) {
-  // check if the stack is already full. Then inserting an element would
-  // lead to stack overflow
-  if (isFull(pt))
-  {
-  printf("Overflow\nProgram Terminated\n");
-  exit(EXIT_FAILURE);
+  if (isFull(pt)){
+    printf("Overflow\nPrograma terminado\n");
+    exit(EXIT_FAILURE);
   }
  
   printf("Inserting %d\n", x);
@@ -275,9 +279,8 @@ void push(Stack *pt, int x) {
 
 int pop(Stack *pt) {
   // check for stack underflow
-  if (isEmpty(pt))
-  {
-  printf("Underflow\nProgram Terminated\n");
+  if (isEmpty(pt)) {
+  printf("Underflow\nPrograma Terminado\n");
   exit(EXIT_FAILURE);
   }
  
@@ -286,7 +289,7 @@ int pop(Stack *pt) {
   // decrement stack size by 1 and (optionally) return the popped element
   return pt->items[pt->top--];
 }
-
+*/
 
 void quemar_arbol(Nodo* raiz) {
 
