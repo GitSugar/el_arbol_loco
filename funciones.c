@@ -59,10 +59,10 @@ int alias_check(char* alias) {
 }
 
 int op_check(char* operacion) {
-  return (isalpha(operacion[0]) || isdigit(operacion[0]));
-}
+  if(isdigit(operacion[0]) == 0 || operacion[0] == ' '){
+    return 1;
+  }
 
-int op_alpha(char* operacion) {
   for(int i = 0; operacion[i] != '\0'; i++) {
     if (isalpha(operacion[i])) {
       return 1;
@@ -101,12 +101,13 @@ char* reordenada(char* string) {
 }
 
 Bosque* encontrar(Bosque* tabla, char* alias) {
-  Bosque* temp = tabla;
-
-  while(strcmp(alias, temp -> alias) != 0) {
-    temp = temp -> sig;
+  while(tabla != NULL) {
+    if(strcmp(alias, tabla -> alias) == 0){
+      return tabla;
+    }
+    tabla = tabla -> sig;
   }
-  return temp;
+  return tabla;
 }
 
 void imprimir(Nodo* raiz) {
@@ -144,6 +145,18 @@ int evaluar(Nodo* raiz, TablaOps* tabla) {
   }
 }
 
+int tres(char* string) {
+  int f = 0;
+  for (int i = 0; string[i] != '\0'; i++) {
+    if(isdigit(string[i]) != 0){
+      f++;
+    }
+    else {
+      f = 0;
+    }
+  }
+  return f;
+}
 
 char* cortar(char* string) {
   int ctr = 0;
@@ -164,16 +177,15 @@ char* cortar(char* string) {
 }
 
 
-
 Nodo* cargar(char *string) {
-  Nodo* newNodo;
-  Nodo* raiz = malloc(sizeof(Nodo));
-
   char *token;
-  char *temp = reordenada(string);
+  char *temp = malloc(sizeof(string) * (strlen(string) + 1));
+  strcpy(temp, string);
+  temp = reordenada(temp);
   
   token = strtok(temp, " ");
 
+  Nodo* raiz = malloc(sizeof(Nodo));  
   raiz -> izq = NULL;
   raiz -> der = NULL;
   raiz -> dato = malloc(sizeof(char) * (strlen(token)+1));
@@ -206,6 +218,7 @@ Nodo* cargar(char *string) {
 
   return raiz;
 }
+
 
 void plantar(Bosque** tabla, Nodo* arbolito, char* operacion, char* nombre) {
   //creo un nuevo elemento

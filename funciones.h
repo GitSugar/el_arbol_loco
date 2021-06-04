@@ -128,6 +128,11 @@ int bot(char* dato);
 /*
 
 */
+int tres(char* string);
+
+/*
+
+*/
 char* tolower_string(char* string);
 
 /*
