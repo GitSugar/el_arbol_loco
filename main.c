@@ -28,13 +28,13 @@ int main(int argc, char const *argv[]) {
   char* input = malloc(sizeof(char)*500);
   char* token;
   
-  cargar_operador(&tabla , "+" , 2 , suma);
-  cargar_operador(&tabla , "-" , 2 , resta);
-  cargar_operador(&tabla , "*" , 2 , producto);
-  cargar_operador(&tabla , "/" , 2 , division);
-  cargar_operador(&tabla , "%" , 1 , modulo);
-  cargar_operador(&tabla , "--", 1 , opuesto);
-  cargar_operador(&tabla , "^" , 2 , potencia);
+  cargar_operador(&tabla , "+" , 2 , &suma);
+  cargar_operador(&tabla , "-" , 2 , &resta);
+  cargar_operador(&tabla , "*" , 2 , &producto);
+  cargar_operador(&tabla , "/" , 2 , &division);
+  cargar_operador(&tabla , "%" , 1 , &modulo);
+  cargar_operador(&tabla , "--", 1 , &opuesto);
+  cargar_operador(&tabla , "^" , 2 , &potencia);
 
   while(1) {
     //Best menu LAS, gg jg papÃ¡.

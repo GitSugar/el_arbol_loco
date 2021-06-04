@@ -5,6 +5,12 @@
 
 #include "operadores.h"
 
+typedef struct STACK{
+  int tamaño_max;
+  //int top;
+  //int *items;
+}Stack;
+
 /*
 Estructura basica para un árbol.
 Contiene nodo Izq, nodo Der y el contenido.
@@ -37,6 +43,7 @@ typedef struct TABLAOPS {
   int aridad;
   FuncionEvaluacion* eval;
 }TablaOps;
+
 
 
 char* tolower_string(char* string) {
@@ -123,9 +130,20 @@ int bot(char* dato) {
   return 0;
 }
 
-int evaluar(Nodo* raiz) {
-  printf("UWU");
+int evaluar(Nodo* raiz, TablaOps* tabla) {
+  if(raiz->der == NULL && raiz->izq == NULL){
+    return (int)raiz->dato;
+  }
+  int valIZ = evaluar(raiz -> izq , tabla);
+  int valDER = evaluar(raiz -> der , tabla);
+  
+  for(;tabla -> sig != NULL; tabla = tabla -> sig){
+    if(strcmp(raiz -> dato , tabla -> simbolo ) == 0){
+      return (tabla -> eval)({valIZ , valDER});
+    }
+  }
 }
+
 
 char* cortar(char* string) {
   int ctr = 0;
@@ -144,6 +162,7 @@ char* cortar(char* string) {
 
   return newString;
 }
+
 
 
 Nodo* cargar(char *string) {
@@ -218,13 +237,54 @@ void cargar_operador(TablaOps** tabla , char* simbolo , int aridad , FuncionEval
   newItem -> simbolo = malloc(sizeof(char) * (strlen(simbolo) + 1)); 
   strcpy(newItem -> simbolo , simbolo);
   newItem -> aridad = aridad;
-  newItem -> eval = &eval;
+  newItem -> eval = eval;
   newItem -> sig = NULL;
   
   if(*tabla != NULL) {
     newItem -> sig = *tabla;
   }
   *tabla = newItem;
+}
+
+
+
+struct stack* newStack(int tamaño) {
+  Stack *pt = malloc(sizeof(Stack));
+ 
+  pt -> tamaño_max = tamaño;
+  pt -> top = -1;
+  pt -> items = malloc(sizeof(int) * tamaño);
+ 
+  return pt;
+}
+
+void push(Stack *pt, int x) {
+  // check if the stack is already full. Then inserting an element would
+  // lead to stack overflow
+  if (isFull(pt))
+  {
+  printf("Overflow\nProgram Terminated\n");
+  exit(EXIT_FAILURE);
+  }
+ 
+  printf("Inserting %d\n", x);
+ 
+  // add an element and increment the top's index
+  pt->items[++pt->top] = x;
+}
+
+int pop(Stack *pt) {
+  // check for stack underflow
+  if (isEmpty(pt))
+  {
+  printf("Underflow\nProgram Terminated\n");
+  exit(EXIT_FAILURE);
+  }
+ 
+  printf("Removing %d\n", peek(pt));
+ 
+  // decrement stack size by 1 and (optionally) return the popped element
+  return pt->items[pt->top--];
 }
 
 

@@ -2,7 +2,7 @@
 #define __FUNCIONES_H__
 //ESTRUCTURAS
 
-typedef int (*FuncionEvaluacion)(int *args);
+typedef int (*FuncionEvaluacion)(int *args)FunPtr;
 
 /*
 Estructura basica para un árbol.
