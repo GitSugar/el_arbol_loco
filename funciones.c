@@ -3,6 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "operadores.h"
+
 /*
 Estructura basica para un árbol.
 Contiene nodo Izq, nodo Der y el contenido.
@@ -35,6 +37,7 @@ typedef struct TABLAOPS {
   int aridad;
   FuncionEvaluacion* eval;
 }TablaOps;
+
 
 char* tolower_string(char* string) {
   for(int i = 0; string[i] != '\0'; i++) {
@@ -124,7 +127,26 @@ int evaluar(Nodo* raiz) {
   printf("UWU");
 }
 
-Nodo* cargar(char *string){
+char* cortar(char* string) {
+  int ctr = 0;
+  int flag = 1;
+  while (flag == 1){
+    ctr++;
+    if(string[ctr] == 'r' && ctr >= 4){
+      flag = 0;
+    }
+  }
+  char* newString = malloc(sizeof(char) * (strlen(string) - ctr));
+
+  for(int i = 0; string[i] != '\0'; i++){
+    newString[i] = string[ctr + 2 + i];
+  }
+
+  return newString;
+}
+
+
+Nodo* cargar(char *string) {
   Nodo* newNodo;
   Nodo* raiz = malloc(sizeof(Nodo));
 
@@ -178,17 +200,33 @@ void plantar(Bosque** tabla, Nodo* arbolito, char* operacion, char* nombre) {
   newItem -> raizOp = malloc(sizeof(Nodo));
   newItem -> sig = NULL;
 
-  if(tabla == NULL) {
+  if(*tabla == NULL) {
     *tabla = newItem;
   }
   else {
     ult = *tabla;
-    while(ult -> sig != NULL) {
+    while(ult -> sig) {
       ult = ult -> sig;
     }
     ult -> sig = newItem;
   }
 }
+
+void cargar_operador(TablaOps** tabla , char* simbolo , int aridad , FuncionEvaluacion eval) {
+  TablaOps *newItem = malloc(sizeof(TablaOps));
+  
+  newItem -> simbolo = malloc(sizeof(char) * (strlen(simbolo) + 1)); 
+  strcpy(newItem -> simbolo , simbolo);
+  newItem -> aridad = aridad;
+  newItem -> eval = &eval;
+  newItem -> sig = NULL;
+  
+  if(*tabla != NULL) {
+    newItem -> sig = *tabla;
+  }
+  *tabla = newItem;
+}
+
 
 void quemar_arbol(Nodo* raiz) {
 

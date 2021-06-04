@@ -14,17 +14,27 @@
 int main(int argc, char const *argv[]) {
 //modifique aca: hay que pasar todo esto a una funcion void interpretar(tablaOps *tabla)
 
+  printf("Trabajo practico I, Estructura de Datos I\n");
+  printf(" |.....................................| \n");
+  printf("Powered by GlaDOS\n");
+
+  TablaOps *tabla = NULL;
+
   Nodo* raiz = NULL;
-  Bosque* tabla = NULL;
+  Bosque* l_arboles = NULL;
 
   Bosque* l_temp = NULL;
 
   char* input = malloc(sizeof(char)*500);
   char* token;
   
-  printf("Trabajo practico I, Estructura de Datos I\n");
-  printf(" |.....................................| ");
-  printf("Powered by GlaDOS\n");
+  cargar_operador(&tabla , "+" , 2 , suma);
+  cargar_operador(&tabla , "-" , 2 , resta);
+  cargar_operador(&tabla , "*" , 2 , producto);
+  cargar_operador(&tabla , "/" , 2 , division);
+  cargar_operador(&tabla , "%" , 1 , modulo);
+  cargar_operador(&tabla , "--", 1 , opuesto);
+  cargar_operador(&tabla , "^" , 2 , potencia);
 
   while(1) {
     //Best menu LAS, gg jg papÃ¡.
@@ -42,7 +52,7 @@ int main(int argc, char const *argv[]) {
     //The eternal IF statement.
 
     if (strcmp(token, "salir") == 0) {
-      salir(tabla);
+      salir(l_arboles);
       free(token);
       free(input);
       free(l_temp);
@@ -50,9 +60,9 @@ int main(int argc, char const *argv[]) {
     }
     else {
       if (strcmp(token, "evaluar") == 0) {
-        token = strtok(NULL, " ");
+        token = strtok(NULL, " ");  //token = alias
 
-        l_temp = encontrar(tabla, token);
+        l_temp = encontrar(l_arboles, token);
         if(l_temp) {
           evaluar(l_temp -> raizOp); //modifique aca
         }
@@ -65,7 +75,7 @@ int main(int argc, char const *argv[]) {
         if (strcmp(token, "imprimir") == 0) {
           token = strtok(NULL, " ");
 
-          l_temp = encontrar(tabla, token);
+          l_temp = encontrar(l_arboles, token);
           if(l_temp) {
             imprimir(l_temp -> raizOp); // modifique aca
           }
@@ -76,12 +86,15 @@ int main(int argc, char const *argv[]) {
         }
         else {
           char* temp = malloc(sizeof(char)*strlen(token));
-          strcpy(temp,token);
+          strcpy(temp, token);
 
-          //mueve el token hasta despues del cargar
-          token = strtok(NULL, " "); // =
-          token = strtok(NULL, " "); // cargar
-          token = strtok(NULL, " "); // la wea operaica
+          // mueve el token hasta despues del cargar
+          // token = strtok(input, "=");
+          // token = operacion
+          token = strtok(NULL, "=");
+          token = cortar(token);
+
+          printf("OPERACION: %s\n", token); //juan = cargar 5 -- 13 + 2 7 * +
 
           //checkeo el alias
           if(alias_check(temp) == 1){
@@ -93,7 +106,7 @@ int main(int argc, char const *argv[]) {
           }
           // ya con alias y operacion llamo a la func que crea el arbol
           
-          if (encontrar(tabla, temp)) {
+          if (encontrar(l_arboles, temp)) {
             printf("El nodo ha sido encontrado en la tabla y sera sobreescrito.");
           }
 
@@ -101,7 +114,7 @@ int main(int argc, char const *argv[]) {
           Nodo* arb_t = cargar(token);
 
           // lo planto en el bosque. Go team trees
-          plantar(*tabla, arb_t, token, temp);
+          plantar(&l_arboles, arb_t, token, temp);
           free(temp);
         }
       }

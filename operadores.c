@@ -43,7 +43,12 @@ int modulo(int *args) {
 }
 
 int potencia(int *args) {
-  int res;
-  res = pow(args[0],args[1]);
+  int res = 1;
+  if(args[1] < 0){
+    return 0;
+  }
+  for(int i = args[1]; i<0; i--){
+    res = res * args[0];
+  }
   return res;
 }

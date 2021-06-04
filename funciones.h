@@ -1,6 +1,9 @@
 #ifndef __FUNCIONES_H__
 #define __FUNCIONES_H__
 //ESTRUCTURAS
+
+typedef int (*FuncionEvaluacion)(int *args);
+
 /*
 Estructura basica para un árbol.
 Contiene nodo Izq, nodo Der y el contenido.
@@ -46,6 +49,10 @@ Nodo* cargar(char *string);
 */
 void plantar(Bosque** tabla, Nodo* arbolito, char* operacion, char* nombre);
 
+/*
+Carga los distintos operadores disponibles en una lista.
+*/
+void cargar_operador(TablaOps** tabla, char* simbolo, int aridad, FuncionEvaluacion Eval);
 
 
 //SALIDA
@@ -54,11 +61,6 @@ void plantar(Bosque** tabla, Nodo* arbolito, char* operacion, char* nombre);
 
 */
 void salir(Bosque* tabla); 
-
-/*
-Carga los distintos operadores disponibles en una lista.
-*/
-void cargar_operador(TablaOps* tabla, char* simbolo, int aridad, FuncionEvaluacion Eval);
 
 /*
 Funcion para liberar memoria. 
@@ -102,6 +104,11 @@ int alias_check(char* alias);
 
 */
 int op_check(char* operacion); 
+
+/*
+
+*/
+char* cortar(char* string);
 
 /*
 

@@ -1,5 +1,6 @@
 #ifndef __OPERADORES_H__
 #define __OPERADORES_H__
+
 typedef int (*FuncionEvaluacion)(int *args);
 
 /*
